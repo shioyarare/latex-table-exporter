@@ -46,7 +46,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("    \\hline");
 
     for (i, col) in columns.iter().enumerate() {
-        println!("    {} \\\\", col.join(" & "));
+        let deficit_num: usize = cmp::max(0, rows_len - col.len());
+        let add_str: String = (0..deficit_num).map(|_| "& ").collect::<String>();
+        println!("    {} {}\\\\", col.join(" & "), add_str);
         if i == 0 { println!("    \\hline \\hline"); }
     }
     println!("    \\hline");
