@@ -16,7 +16,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         filename = path.to_str().unwrap().to_string() + "/" + filename.as_str();
     }
 
-    println!("{}", filename);
     let mut rows_len: usize = 0;  // 最大列数
     let mut columns: Vec<Vec<String>> = Vec::new(); // 行データ 
 
