@@ -17,7 +17,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     println!("{}", filename);
-    let mut str_len: usize = 0;   // 最大文字数
     let mut rows_len: usize = 0;  // 最大列数
     let mut columns: Vec<Vec<String>> = Vec::new(); // 行データ 
 
@@ -31,8 +30,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                                        .collect();
         // 値の更新
         rows_len = cmp::max(rows_len, l.len());
-        let curr_str_len = l.iter().map(|x| x.len()).max().unwrap();
-        str_len = cmp::max(str_len, curr_str_len);
         columns.push(l);
     }
 
