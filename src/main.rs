@@ -7,8 +7,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // ファイル名が含まれていない場合終了
     if args.len() < 2 { panic!("No input file"); }
-    let filename = args[1].clone();
+    
+    let mut filename: String = args[1].clone();
+    let c = filename.chars().nth(0).unwrap();
+    if c != '/' && c != '~' {
+        // フルパスで指定されていない場合はフルパスを作成
+        let path = env::current_dir()?;
+        filename = path.to_str().unwrap().to_string() + "/" + filename.as_str();
+    }
 
+    println!("{}", filename);
     let mut str_len: usize = 0;   // 最大文字数
     let mut rows_len: usize = 0;  // 最大列数
     let mut columns: Vec<Vec<String>> = Vec::new(); // 行データ 
