@@ -20,6 +20,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut columns: Vec<Vec<String>> = Vec::new(); // 行データ 
 
     for result in BufReader::new(File::open(filename)?).lines() {
+        // コメント行を読み飛ばし
+        if result.as_ref().unwrap().to_string().chars().nth(0).unwrap() == '#' {
+            continue;
+        }
+
         // 一行ずつ読み取り分割
         let l: Vec<String> = result.unwrap()
                                        .as_str()
@@ -27,6 +32,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                                        .split_whitespace()
                                        .map(|x| x.to_string() )
                                        .collect();
+
         // 値の更新
         rows_len = cmp::max(rows_len, l.len());
         columns.push(l);
